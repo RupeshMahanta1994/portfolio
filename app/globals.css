@@ -36,3 +36,30 @@ body { background: var(--color-bg); color: var(--color-fg); font-family: var(--f
     0 40px 120px -30px color-mix(in srgb, var(--accent-glow) 40%, transparent),
     0 0 0 1px color-mix(in srgb, var(--accent-glow) 25%, transparent);
 }
+
+/* About backdrop: two slow-drifting neon glows plus faint twinkling dots */
+.about-glow {
+  position: absolute; border-radius: 9999px; filter: blur(80px); opacity: .22; pointer-events: none;
+  animation: about-drift 18s ease-in-out infinite alternate;
+}
+.about-glow--a { width: 28rem; height: 28rem; left: -6rem; top: 10%; background: #7c6cff; }
+.about-glow--b { width: 24rem; height: 24rem; right: -4rem; bottom: 5%; background: #3fd6a0; opacity: .14; animation-duration: 24s; animation-delay: -8s; }
+.about-dots {
+  position: absolute; inset: 0; pointer-events: none; opacity: .5;
+  background-image:
+    radial-gradient(1.5px 1.5px at 12% 22%, #9cb6ff, transparent),
+    radial-gradient(1.5px 1.5px at 78% 14%, #7fd1ae, transparent),
+    radial-gradient(1px 1px at 45% 70%, #fff, transparent),
+    radial-gradient(1.5px 1.5px at 90% 62%, #9cb6ff, transparent),
+    radial-gradient(1px 1px at 28% 88%, #7fd1ae, transparent),
+    radial-gradient(1px 1px at 62% 35%, #fff, transparent);
+  animation: about-twinkle 6s ease-in-out infinite alternate;
+}
+@keyframes about-drift { to { transform: translate3d(5rem, -3rem, 0) scale(1.15); } }
+@keyframes about-twinkle { from { opacity: .2; } to { opacity: .6; } }
+@media (prefers-reduced-motion: reduce) { .about-glow, .about-dots { animation: none; } }
+.about-backdrop {
+  position: absolute; inset: 0; pointer-events: none;
+  -webkit-mask-image: linear-gradient(to bottom, transparent, #000 25%, #000 75%, transparent);
+  mask-image: linear-gradient(to bottom, transparent, #000 25%, #000 75%, transparent);
+}
