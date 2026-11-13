@@ -1,0 +1,24 @@
+@import "tailwindcss";
+
+@theme {
+  --color-bg: #050505;
+  --color-surface: #0e0e10;
+  --color-border: #232327;
+  --color-muted: #9a9aa3;
+  --color-fg: #f4f4f5;
+  --color-accent: #7c5cff; /* change this to your accent colour */
+  --font-sans: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
+  --font-mono: var(--font-mono), ui-monospace, monospace;
+}
+
+html { scroll-behavior: smooth; scroll-padding-top: 5rem; }
+body { background: var(--color-bg); color: var(--color-fg); font-family: var(--font-sans); }
+::selection { background: color-mix(in srgb, var(--color-accent) 40%, transparent); }
+
+/* Scroll-reveal, driven by components/ui/Reveal.tsx */
+.reveal { opacity: 0; transform: translateY(16px); transition: opacity .6s ease, transform .6s ease; }
+.reveal.is-visible { opacity: 1; transform: none; }
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  .reveal { opacity: 1; transform: none; transition: none; }
+}
