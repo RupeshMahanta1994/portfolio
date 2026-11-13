@@ -22,3 +22,17 @@ body { background: var(--color-bg); color: var(--color-fg); font-family: var(--f
   html { scroll-behavior: auto; }
   .reveal { opacity: 1; transform: none; transition: none; }
 }
+
+/* Neon spread behind each featured project; colour set per row via --accent-glow */
+.accent-glow {
+  background-image: radial-gradient(
+    55% 80% at var(--glow-x, 24%) 50%,
+    color-mix(in srgb, var(--accent-glow) var(--glow-amount, 26%), transparent),
+    transparent 70%
+  );
+}
+.accent-frame {
+  box-shadow:
+    0 40px 120px -30px color-mix(in srgb, var(--accent-glow) 40%, transparent),
+    0 0 0 1px color-mix(in srgb, var(--accent-glow) 25%, transparent);
+}
