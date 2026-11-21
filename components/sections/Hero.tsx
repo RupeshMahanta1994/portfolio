@@ -6,6 +6,7 @@ import { HeroOrbit } from "@/components/ui/HeroOrbit";
 
 const statusStyle: Record<ProjectStatus, { label: string; cls: string }> = {
   live: { label: "Live", cls: "text-indigo-300" },
+  completed: { label: "Completed", cls: "text-sky-300" },
   "in-progress": { label: "In progress", cls: "text-orange-400" },
   archived: { label: "Past role", cls: "text-muted" },
 };

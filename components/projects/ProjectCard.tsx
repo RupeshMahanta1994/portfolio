@@ -8,6 +8,7 @@ const accents = ["#7C6CFF", "#3FD6A0", "#FF8A4C"];
 export function FeaturedRow({ p, index }: { p: Project; index: number }) {
   const flip = index % 2 === 1;
   const glow = accents[index % accents.length];
+  const repo = p.links.find((l) => l.label === "GitHub");
   return (
     <article
       className="accent-glow grid items-center gap-8 border-t border-border/60 py-14 first:border-t-0 first:pt-0 md:gap-14 lg:grid-cols-2 lg:py-20"
@@ -40,12 +41,16 @@ export function FeaturedRow({ p, index }: { p: Project; index: number }) {
           ))}
         </dl>
         <ul className="mt-6 flex flex-wrap gap-1.5">{p.tags.slice(0, 6).map((t) => <li key={t}><Tag>{t}</Tag></li>)}</ul>
-        <Link
-          href={`/projects/${p.slug}/`}
-          className="mt-8 inline-flex items-center gap-2 rounded-full border border-border px-5 py-2.5 text-sm font-semibold transition hover:bg-white/5"
-        >
-          Case study <span aria-hidden>→</span>
-        </Link>
+        <div className="mt-8 flex flex-wrap items-center gap-3">
+          {repo && (
+            <a href={repo.href} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 rounded-full border border-border px-5 py-2.5 text-sm font-semibold transition hover:bg-white/5">
+              GitHub <span aria-hidden>↗</span>
+            </a>
+          )}
+          <Link href={`/projects/${p.slug}/`} className="inline-flex items-center gap-2 rounded-full border border-border px-5 py-2.5 text-sm font-semibold transition hover:bg-white/5">
+            Case study <span aria-hidden>→</span>
+          </Link>
+        </div>
       </div>
     </article>
   );

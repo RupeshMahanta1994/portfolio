@@ -36,41 +36,14 @@ export const projects: Project[] = [
     ],
   },
   {
-    slug: "railways-signal-app",
-    title: "Railway Signal Engineers Web Apps",
-    summary: "Indian Railways · Junior Engineer. Enterprise web applications used by 500+ Railway Signal Engineers.",
-    status: "archived",
-    category: "completed",
-    featured: true,
-    tags: ["React.js", "Java", "Spring Boot", "Node.js", "SQL"],
-    durationWeeks: 183,
-    teamSize: 1,
-    year: 2020,
-    stats: [
-      { label: "Users", value: "500+" },
-      { label: "Pages", value: "50+" },
-      { label: "Backend", value: "~2 yrs" },
-    ],
-    links: [],
-    overview:
-      "Developed and maintained enterprise web applications for Railway Signal Engineers, spanning the React frontend, Java and Node.js backend services, and the database.",
-    features: [
-      "50+ responsive UI pages with React.js, JavaScript, HTML and CSS",
-      "Backend REST APIs in Java and Spring Boot for about 2 years: business logic, request validation, exception handling and database integration",
-      "Node.js backend services and APIs supporting application features and frontend integration",
-      "SQL queries for data retrieval, application maintenance and issue resolution",
-    ],
-    outcomes: ["Debugged and resolved issues across frontend, backend and database layers"],
-  },
-  {
     slug: "twitter-clone",
     title: "Twitter Clone",
     summary: "Full-stack social app with JWT auth, a follow feed, real-time notifications, image uploads and ranked full-text search.",
-    status: "in-progress",
+    status: "completed",
     category: "completed",
     featured: true,
     tags: ["Java 21", "Spring Boot", "PostgreSQL", "React 19", "Vite", "WebSocket", "MinIO", "Docker"],
-    durationWeeks: 1,
+    durationWeeks: 9,
     teamSize: 1,
     year: 2026,
     stats: [
@@ -78,7 +51,7 @@ export const projects: Project[] = [
       { label: "Search, 500k tweets", value: "~4 ms" },
       { label: "Images per tweet", value: "4" },
     ],
-    links: [],
+    links: [{ label: "GitHub", href: "https://github.com/RupeshMahanta1994/twitter-clone" }],
     overview:
       "A Twitter-style app built end to end: a stateless JWT Spring Boot API on PostgreSQL with a React single-page frontend, run together with Docker Compose.",
     features: [
@@ -98,11 +71,11 @@ export const projects: Project[] = [
     slug: "pick-my-show",
     title: "PickMyShow",
     summary: "Event ticket booking platform with live seat maps, timed seat holds, payments and an admin dashboard.",
-    status: "in-progress",
+    status: "completed",
     category: "completed",
     featured: true,
     tags: ["Java 21", "Spring Boot", "PostgreSQL", "Redis", "Kafka", "WebSocket", "React 19", "TanStack Query", "Docker"],
-    durationWeeks: 1,
+    durationWeeks: 4,
     teamSize: 1,
     year: 2026,
     stats: [
@@ -110,7 +83,7 @@ export const projects: Project[] = [
       { label: "Seat hold", value: "5 min" },
       { label: "Migrations", value: "9" },
     ],
-    links: [],
+    links: [{ label: "GitHub", href: "https://github.com/RupeshMahanta1994/pick-my-show" }],
     overview:
       "A BookMyShow-style booking platform where users browse events, pick seats on a live map, hold them briefly and pay. Spring Boot, PostgreSQL, Redis and Kafka on the backend, React on the front.",
     features: [

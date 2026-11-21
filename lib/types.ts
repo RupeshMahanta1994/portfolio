@@ -1,4 +1,4 @@
-export type ProjectStatus = "live" | "in-progress" | "archived";
+export type ProjectStatus = "live" | "completed" | "in-progress" | "archived";
 export type ProjectCategory = "completed" | "client" | "archived";
 
 export interface Stat {
