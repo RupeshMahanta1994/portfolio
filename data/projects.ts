@@ -98,6 +98,49 @@ export const projects: Project[] = [
       "Dark, theatre-style React UI with a seat map, hold countdown timer, checkout and booking confirmation",
     ],
   },
+  {
+    slug: "evenly",
+    title: "Evenly",
+    summary: "Expense splitter on a double-entry ledger where the books cannot silently drift, with a settle-up plan that uses the fewest payments.",
+    status: "completed",
+    category: "completed",
+    featured: true,
+    tags: ["Java 21", "Spring Boot 4", "PostgreSQL 18", "Flyway", "React 19", "TypeScript", "TanStack Query", "Docker"],
+    durationWeeks: 3,
+    teamSize: 1,
+    year: 2026,
+    stats: [
+      { label: "Backend tests", value: "227" },
+      { label: "Balances, 50k entries", value: "13 ms" },
+      { label: "Migrations", value: "9" },
+    ],
+    links: [{ label: "GitHub", href: "https://github.com/RupeshMahanta1994/Evenly" }],
+    image: "/images/evenly/05-settle-up.png",
+    screenshots: [
+      { src: "/images/evenly/04-balances.png", alt: "Balances page with a who-owes-whom graph and the same data as a table", caption: "Balances are derived from the ledger on every request and never stored. The graph has a table twin for screen readers." },
+      { src: "/images/evenly/03-split-editor.png", alt: "Expense form with the exact-amounts split editor and a left-to-allocate counter", caption: "The split editor: Save stays disabled until the live \"left to allocate\" counter reaches zero." },
+      { src: "/images/evenly/06-foreign-expense.png", alt: "Expense detail showing a euro amount converted to rupees with the exchange rate booked", caption: "A foreign-currency expense keeps what was entered, the rate applied, the day it came from and the ledger entries it produced." },
+      { src: "/images/evenly/07-ledger.png", alt: "Raw ledger table of every entry including reversals", caption: "The ledger view: every posting, corrections as reversing entries, nothing ever edited or deleted." },
+    ],
+    overview:
+      "Most expense splitters keep a balance column and adjust it on every expense, which drifts the moment two requests interleave or an expense is edited. Evenly never stores a balance: every balance is a sum over an append-only ledger, and PostgreSQL itself refuses a transaction that does not add up. Built end to end as a Spring Boot modular monolith with a React console.",
+    features: [
+      "Five split methods (equal, exact, percentage, shares, itemised) on a largest-remainder allocator, so shares sum to the total to the last minor unit for any amount",
+      "A settle-up plan in two modes: simplified (fewest payments, with an exact search for zero-sum groups) and direct (only people who shared an expense), each payment explained by the expenses behind it",
+      "Idempotent settlement confirmation, If-Match on edits, and a 409 carrying the fresh plan when balances changed, so stale numbers are never settled",
+      "Multi-currency expenses: the total is converted once at the ECB rate and then split, with the rate and its day stored on the transaction",
+      "Corrections post reversals instead of editing history; an audit trail and activity feed show every edit and void",
+      "React console with generated API types, a live remaining-to-allocate counter in the split editor, and a who-owes-whom graph",
+    ],
+    outcomes: [
+      "Unbalanced transactions are impossible to insert: a deferred database trigger refuses them at commit, proved with raw-SQL tests rather than application code",
+      "The app connects as a role that cannot update or delete the ledger, and the tables refuse it even for their owner",
+      "Property tests over 10,000 generated splits and thousands of generated balance vectors; mutation testing scores the pure domain at 93%",
+      "227 backend tests on a real PostgreSQL via Testcontainers and 104 console tests; 96.9% line coverage",
+      "Balance query takes 13 ms on a ledger of 50,000 entries, enforced as a build failure above 50 ms",
+      "Measured honestly: the optimiser saves about 0-1% over plain greedy on typical groups and 13-23% only when members form separate circles",
+    ],
+  },
 ];
 
 export const getProject = (slug: string) => projects.find((p) => p.slug === slug);

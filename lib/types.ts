@@ -22,6 +22,10 @@ export interface Project {
   overview: string;
   features: string[];
   outcomes: string[];
+  /** Hero screenshot for the featured row and the top of the case study (path under /public). */
+  image?: string;
+  /** Extra screenshots shown in the case study, each with a caption. */
+  screenshots?: { src: string; alt: string; caption: string }[];
 }
 
 export interface SkillGroup {

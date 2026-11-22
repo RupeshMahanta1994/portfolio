@@ -1,3 +1,4 @@
+import Image from "next/image";
 import Link from "next/link";
 import type { Project } from "@/lib/types";
 import { StatusBadge, Tag } from "@/components/ui/Badge";
@@ -26,11 +27,31 @@ export function CaseStudy({ project: p, next }: { project: Project; next: Projec
       <div className="mt-10">
         <StatRow stats={[{ label: "Team", value: p.teamSize === 1 ? "Solo" : String(p.teamSize) }, { label: "Duration", value: `${p.durationWeeks}w` }, ...p.stats]} />
       </div>
-      <div className="mt-10 aspect-video rounded-xl border border-border bg-gradient-to-br from-accent/20 to-surface" aria-hidden />
+      {p.image ? (
+        <div className="relative mt-10 aspect-video overflow-hidden rounded-xl border border-border bg-surface">
+          <Image src={p.image} alt={`${p.title} screenshot`} fill sizes="(min-width: 768px) 768px, 100vw" className="object-cover object-top" priority />
+        </div>
+      ) : (
+        <div className="mt-10 aspect-video rounded-xl border border-border bg-gradient-to-br from-accent/20 to-surface" aria-hidden />
+      )}
 
       <section className="mt-10"><h2 className="mb-3 text-xl font-semibold">Overview</h2><p className="text-muted">{p.overview}</p></section>
       <List title="What it does" items={p.features} />
       <List title="Outcomes" items={p.outcomes} />
+      {p.screenshots?.length ? (
+        <section className="mt-10">
+          <h2 className="mb-4 text-xl font-semibold">Screens</h2>
+          <div className="space-y-8">
+            {p.screenshots.map((s) => (
+              <figure key={s.src}>
+                {/* Natural size, so tall full-page captures are not cropped. */}
+                <Image src={s.src} alt={s.alt} width={1280} height={900} className="h-auto w-full rounded-xl border border-border" />
+                <figcaption className="mt-2 text-sm text-muted">{s.caption}</figcaption>
+              </figure>
+            ))}
+          </div>
+        </section>
+      ) : null}
       <section className="mt-10"><h2 className="mb-3 text-xl font-semibold">Built with</h2><ul className="flex flex-wrap gap-2">{p.tags.map((t) => <li key={t}><Tag>{t}</Tag></li>)}</ul></section>
 
       <Link href={`/projects/${next.slug}/`} className="mt-16 block rounded-xl border border-border bg-surface p-5 hover:border-accent">

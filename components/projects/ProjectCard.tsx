@@ -1,3 +1,4 @@
+import Image from "next/image";
 import Link from "next/link";
 import type { Project } from "@/lib/types";
 import { StatusBadge, Tag } from "@/components/ui/Badge";
@@ -14,18 +15,23 @@ export function FeaturedRow({ p, index }: { p: Project; index: number }) {
       className="accent-glow grid items-center gap-8 border-t border-border/60 py-14 first:border-t-0 first:pt-0 md:gap-14 lg:grid-cols-2 lg:py-20"
       style={{ "--accent-glow": glow, "--glow-x": flip ? "76%" : "24%" } as React.CSSProperties}
     >
-      {/* Replace with a screenshot: <Image src={`/images/${p.slug}.webp`} .../> */}
       <div
         className={`accent-frame relative aspect-[16/10] w-full overflow-hidden rounded-2xl border border-border/60 bg-surface ${flip ? "lg:order-2" : ""}`}
-        aria-hidden
+        aria-hidden={p.image ? undefined : true}
       >
-        <div
-          className="absolute inset-0"
-          style={{ background: `radial-gradient(70% 70% at 30% 20%, color-mix(in srgb, ${glow} 35%, transparent), transparent), linear-gradient(135deg, #12121a, #050505)` }}
-        />
-        <span className="absolute inset-0 flex items-center justify-center font-mono text-7xl font-bold text-white/90">
-          {p.title.charAt(0)}
-        </span>
+        {p.image ? (
+          <Image src={p.image} alt={`${p.title} screenshot`} fill sizes="(min-width: 1024px) 560px, 100vw" className="object-cover object-top" />
+        ) : (
+          <>
+            <div
+              className="absolute inset-0"
+              style={{ background: `radial-gradient(70% 70% at 30% 20%, color-mix(in srgb, ${glow} 35%, transparent), transparent), linear-gradient(135deg, #12121a, #050505)` }}
+            />
+            <span className="absolute inset-0 flex items-center justify-center font-mono text-7xl font-bold text-white/90">
+              {p.title.charAt(0)}
+            </span>
+          </>
+        )}
       </div>
 
       <div className={`flex flex-col items-start ${flip ? "lg:order-1" : ""}`}>
